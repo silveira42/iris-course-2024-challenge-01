@@ -1,0 +1,53 @@
+{
+    // Configurações de conexão
+    "objectscript.conn": {
+        "active": true,
+        "host": "localhost",
+        "port": 52773,
+        "username": "",
+        "password": "",
+        "ns": "HELLO_WORLD",
+        "https": false
+    },
+    // Configurações do VsCode
+    "editor.formatOnSave": true,
+    "editor.detectIndentation": false,
+    // Configurações do git e GitHub
+    "git.confirmSync": true,
+    "git.autofetch": true,
+    "git.confirmForcePush": true,
+    "git.pruneOnFetch": true,
+    "git.fetchOnPull": true,
+    "git.branchProtectionPrompt": "alwaysPrompt",
+    "git.branchProtection": [
+        "main",
+        "hom"
+    ],
+    "branchwarnings.protectedBranches": [
+        "main",
+        "hom"
+    ],
+    "github.branchProtection": true,
+    // Configurações do ObjectScript
+    "intersystems.testingManager.client.relativeTestRoot": "internal/testing/unittests",
+    "[objectscript-class]": {
+        "editor.defaultFormatter": "intersystems.language-server"
+    },
+    "intersystems.language-server.diagnostics.classes": true,
+    "intersystems.language-server.diagnostics.deprecation": true,
+    "intersystems.language-server.diagnostics.parameters": true,
+    "intersystems.language-server.diagnostics.routines": true,
+    "intersystems.language-server.diagnostics.zutil": true,
+    "intersystems.language-server.formatting.commands.case": "word",
+    "intersystems.language-server.formatting.commands.length": "long",
+    "intersystems.language-server.formatting.expandClassNames": true,
+    "intersystems.language-server.formatting.system.case": "upper",
+    "intersystems.language-server.formatting.system.length": "long",
+    "intersystems.language-server.hover.commands": true,
+    "intersystems.language-server.hover.preprocessor": true,
+    "intersystems.language-server.hover.system": true,
+    "intersystems.language-server.refactor.exceptionVariable": "exception",
+    "intersystems.language-server.signaturehelp.documentation": true,
+    "intersystems.language-server.suggestTheme": false,
+    "intersystems.language-server.trace.server": "off",
+}

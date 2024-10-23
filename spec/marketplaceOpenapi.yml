@@ -1,0 +1,131 @@
+openapi: 3.0.0
+info:
+  title: Marketplace API
+  description: API para integração entre ERP e Marketplace, utilizando eventos para sincronização de dados.
+  version: 1.0.0
+servers:
+  - url: https://api.marketplace.com/v1
+    description: Servidor de produção
+
+paths:
+  /products:
+    post:
+      summary: Publicar produto
+      description: Publica um produto no marketplace.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "201":
+          description: Produto publicado com sucesso
+        "400":
+          description: Requisição inválida
+
+  /payments:
+    post:
+      summary: Processar pagamento
+      description: Processa um pagamento no Marketplace.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Payment"
+      responses:
+        "200":
+          description: Pagamento processado com sucesso
+        "400":
+          description: Requisição inválida
+
+  /shipments:
+    post:
+      summary: Atualizar envio
+      description: Atualiza o status do envio de um pedido no Marketplace.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Shipment"
+      responses:
+        "200":
+          description: Envio atualizado com sucesso
+        "400":
+          description: Requisição inválida
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        product_id:
+          type: string
+        marketplace_id:
+          type: string
+        status:
+          type: string
+          enum: [published, pending, rejected]
+        price:
+          type: number
+          format: float
+        available_stock:
+          type: integer
+
+    Order:
+      type: object
+      properties:
+        order_id:
+          type: string
+        marketplace_order_id:
+          type: string
+        status:
+          type: string
+          enum: [processed, canceled]
+        shipping_date:
+          type: string
+          format: date-time
+
+    Customer:
+      type: object
+      properties:
+        marketplace_customer_id:
+          type: string
+        customer_id:
+          type: string
+        email:
+          type: string
+          format: email
+        status:
+          type: string
+          enum: [registered, pending]
+
+    Payment:
+      type: object
+      properties:
+        payment_id:
+          type: string
+        marketplace_payment_id:
+          type: string
+        status:
+          type: string
+          enum: [completed, failed]
+        processing_date:
+          type: string
+          format: date-time
+
+    Shipment:
+      type: object
+      properties:
+        shipment_id:
+          type: string
+        marketplace_shipment_id:
+          type: string
+        status:
+          type: string
+          enum: [shipped, in_transit, delivered, delayed]
+        estimated_delivery:
+          type: string
+          format: date-time
