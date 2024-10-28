@@ -1,12 +1,10 @@
-Class core.log.Payment Extends %Persistent
+Class core.log.Payment Extends core.log.Base
 {
 
-Property CreatedAt As %TimeStamp;
-
-Property Payload As %String;
-
-ClassMethod Create(pPayload As %String) As core.log.Payment
+ClassMethod Create(pPayload As %Library.String) As core.log.Payment
 {
+    // Todo: Adicionar validação do formato do payload
+
     Set newLog = ##class(core.log.Payment).%New()
     Set newLog.Payload = pPayload
     $$$ThrowOnError(newLog.%Save())
@@ -14,7 +12,7 @@ ClassMethod Create(pPayload As %String) As core.log.Payment
     Return newLog
 }
 
-ClassMethod ReadByDate(pDateTime As %TimeStamp) As %Collection.ListOfObj
+ClassMethod ReadByDate(pDateTime As %Library.TimeStamp) As %Collection.ListOfObj
 {
     Set sqlContext = ##Class(%SQL.Statement).%ExecDirect(,"CALL core_log.Payment_SelectByDateGreaterEqual(?)", pDateTime)
 
@@ -34,7 +32,7 @@ ClassMethod ReadByDate(pDateTime As %TimeStamp) As %Collection.ListOfObj
 }
 
 /// Description
-Query SelectByDateGreaterEqual(pDateTime As %TimeStamp) As %SQLQuery [ SqlProc ]
+Query SelectByDateGreaterEqual(pDateTime As %Library.TimeStamp) As %Library.SQLQuery [ SqlProc ]
 {
     SELECT Id, CreatedAt, Payload
     FROM core_log.Payment
@@ -44,22 +42,6 @@ Query SelectByDateGreaterEqual(pDateTime As %TimeStamp) As %SQLQuery [ SqlProc ]
 
 Storage Default
 {
-<Data name="PaymentDefaultData">
-<Value name="1">
-<Value>%%CLASSNAME</Value>
-</Value>
-<Value name="2">
-<Value>CreatedAt</Value>
-</Value>
-<Value name="3">
-<Value>Payload</Value>
-</Value>
-</Data>
-<DataLocation>^core.log.PaymentD</DataLocation>
-<DefaultData>PaymentDefaultData</DefaultData>
-<IdLocation>^core.log.PaymentD</IdLocation>
-<IndexLocation>^core.log.PaymentI</IndexLocation>
-<StreamLocation>^core.log.PaymentS</StreamLocation>
 <Type>%Storage.Persistent</Type>
 }
 

@@ -18,9 +18,7 @@ ClassMethod Execute(pHost As core.bo.payment.Operation, pRequest As core.bo.paym
         Return exception.AsStatus()
     }
 
-    Set paymentObj = ##class(core.obj.Payment).%New()
-    Set paymentObj.Payload = paymentLog.Payload
-    Set paymentObj.CreatedAt = paymentLog.CratedAt
+    Set paymentObj = ##class(core.obj.Payment).FromLog(paymentLog)
 
     Set pResponse.Payment = paymentObj
 
