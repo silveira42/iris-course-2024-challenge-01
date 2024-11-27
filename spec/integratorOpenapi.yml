@@ -1,171 +1,175 @@
 openapi: 3.0.0
 info:
-  title: Integrator API
-  description: API da integração entre ERP e Marketplace, utilizando eventos para sincronização de dados.
-  version: 1.0.0
+    title: Integrator API
+    description: API da integração entre ERP e Marketplace, utilizando eventos para sincronização de dados.
+    version: 1.0.0
 servers:
-  - url: https://api.integrator.com/v1
-    description: Servidor de produção
+    - url: https://api.integrator.com/v1
+      description: Servidor de produção
 
 paths:
-  /products:
-    post:
-      summary: Criar produto
-      description: Recebe produto do ERP.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Product"
-      responses:
-        "201":
-          description: Produto criado com sucesso
-        "400":
-          description: Requisição inválida
+    /products:
+        post:
+            summary: Criar produto
+            description: Recebe produto do ERP.
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Product"
+            responses:
+                "201":
+                    description: Produto criado com sucesso
+                "400":
+                    description: Requisição inválida
 
-  /payments:
-    post:
-      summary: Registrar pagamento
-      description: Recebe pagamento do ERP.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Payment"
-      responses:
-        "201":
-          description: Pagamento registrado com sucesso
-        "400":
-          description: Requisição inválida
+    /payments:
+        post:
+            summary: Registrar pagamento
+            description: Recebe pagamento do ERP.
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Payment"
+            responses:
+                "201":
+                    description: Pagamento registrado com sucesso
+                "400":
+                    description: Requisição inválida
 
-  /orders:
-    post:
-      summary: Processar pedido
-      description: Recebe pedido do Marketplace.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Order"
-      responses:
-        "200":
-          description: Pedido processado com sucesso
-        "400":
-          description: Requisição inválida
+    /orders:
+        post:
+            summary: Processar pedido
+            description: Recebe pedido do Marketplace.
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Order"
+            responses:
+                "200":
+                    description: Pedido processado com sucesso
+                "400":
+                    description: Requisição inválida
 
-  /customers:
-    post:
-      summary: Registrar cliente
-      description: Recebe pedido do Marketplace.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Customer"
-      responses:
-        "201":
-          description: Cliente registrado com sucesso
-        "400":
-          description: Requisição inválida
+    /customers:
+        post:
+            summary: Registrar cliente
+            description: Recebe pedido do Marketplace.
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Customer"
+            responses:
+                "201":
+                    description: Cliente registrado com sucesso
+                "400":
+                    description: Requisição inválida
 
-  /shipments:
-    post:
-      summary: Criar envio
-      description: Recebe envio do ERP.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Shipment"
-      responses:
-        "201":
-          description: Envio criado com sucesso
-        "400":
-          description: Requisição inválida
+    /shipments:
+        post:
+            summary: Criar envio
+            description: Recebe envio do ERP.
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Shipment"
+            responses:
+                "201":
+                    description: Envio criado com sucesso
+                "400":
+                    description: Requisição inválida
 
 components:
-  schemas:
-    Product:
-      type: object
-      properties:
-        productId:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        price:
-          type: number
-          format: float
-        stock:
-          type: integer
-        category:
-          type: string
+    schemas:
+        Product:
+            type: object
+            properties:
+                productId:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+                price:
+                    type: number
+                    format: float
+                stock:
+                    type: integer
+                category:
+                    type: string
 
-    Payment:
-      type: object
-      properties:
-        paymentId:
-          type: string
-        orderId:
-          type: string
-        amount:
-          type: number
-          format: float
-        paymentMethod:
-          type: string
-          enum: [credit_card, boleto, pix, paypal]
-        paymentDate:
-          type: string
-          format: date-time
-        status:
-          type: string
-          enum: [pending, approved, rejected]
+        Payment:
+            type: object
+            properties:
+                paymentId:
+                    type: string
+                orderId:
+                    type: string
+                amount:
+                    type: number
+                    format: float
+                paymentMethod:
+                    type: string
+                    enum: [credit_card, boleto, pix, paypal]
+                paymentDate:
+                    type: string
+                    format: date-time
+                status:
+                    type: string
+                    enum: [pending, approved, rejected]
 
-    Shipment:
-      type: object
-      properties:
-        shipmentId:
-          type: string
-        orderId:
-          type: string
-        carrier:
-          type: string
-        trackingNumber:
-          type: string
-        shipmentDate:
-          type: string
-          format: date-time
+        Shipment:
+            type: object
+            properties:
+                shipmentId:
+                    type: string
+                orderId:
+                    type: string
+                carrier:
+                    type: string
+                trackingNumber:
+                    type: string
+                shipmentDate:
+                    type: string
+                    format: date-time
 
-    Order:
-      type: object
-      properties:
-        order_id:
-          type: string
-        marketplace_order_id:
-          type: string
-        status:
-          type: string
-          enum: [processed, canceled]
-        shipping_date:
-          type: string
-          format: date-time
+        Order:
+            type: object
+            properties:
+                order_id:
+                    type: string
+                marketplace_order_id:
+                    type: string
+                product_id:
+                    type: number
+                price:
+                    type: number
+                status:
+                    type: string
+                    enum: [processed, canceled]
+                shipping_date:
+                    type: string
+                    format: date-time
 
-    Customer:
-      type: object
-      properties:
-        marketplace_customer_id:
-          type: string
-        customer_id:
-          type: string
-        email:
-          type: string
-          format: email
-        status:
-          type: string
-          enum: [registered, pending]
+        Customer:
+            type: object
+            properties:
+                marketplace_customer_id:
+                    type: string
+                customer_id:
+                    type: string
+                email:
+                    type: string
+                    format: email
+                status:
+                    type: string
+                    enum: [registered, pending]
