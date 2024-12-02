@@ -1,14 +1,14 @@
-Class core.bo.order.create.Response Extends Ens.Response
+Class core.bs.order.create.Response Extends Ens.Response
 {
 
-Property Order As core.obj.Order;
+Property OrderLog As core.obj.Order;
 
 Storage Default
 {
 <Data name="ResponseDefaultData">
 <Subscript>"Response"</Subscript>
 <Value name="1">
-<Value>Order</Value>
+<Value>OrderLog</Value>
 </Value>
 </Data>
 <DefaultData>ResponseDefaultData</DefaultData>

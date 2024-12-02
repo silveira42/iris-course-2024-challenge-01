@@ -10,10 +10,12 @@ ClassMethod Execute(pHost As core.bo.order.Operation, pRequest As core.bo.order.
 	}
 
 	Try {
-		Do ##class(core.log.Order).Create(pRequest.Order)
+		Set orderLog = ##class(core.log.Order).Create(pRequest.Order)
 	} Catch (exception)	{
 		Return exception.AsStatus()
 	}
+
+	Set pResponse.Order = ##class(core.obj.Order).FromLog(orderLog)
 
 	Return $$$OK
 }

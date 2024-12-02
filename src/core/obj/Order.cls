@@ -1,4 +1,4 @@
-Class core.obj.Order Extends %Library.SerialObject
+Class core.obj.Order Extends (%Library.SerialObject, %JSON.Adaptor, %XML.Adaptor)
 {
 
 Property Id As %Library.Numeric;
